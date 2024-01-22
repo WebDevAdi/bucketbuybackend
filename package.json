@@ -1,0 +1,26 @@
+{
+  "name": "bucketbuy-backend",
+  "version": "1.0.0",
+  "description": "An ecommerce project where you can buy any stuff you want",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon scr/index.js"
+  },
+  "author": "Aditya Chauhan",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
+    "validator": "^13.11.0"
+  }
+}
