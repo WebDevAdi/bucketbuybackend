@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon scr/index.js"
+    "start": "node index.js"
   },
   "author": "Aditya Chauhan",
   "license": "ISC",
