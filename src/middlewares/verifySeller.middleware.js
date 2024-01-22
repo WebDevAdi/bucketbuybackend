@@ -9,12 +9,6 @@ const verifySeller = async (req,res,next) =>{
     const accessToken = await req.cookies.accessToken  
     console.log(req.cookies);
     // || req.headers['authorization']?.replace('Bearer ','')
-
-    // const accessToken = req.cookies.accessToken
-    // console.log(req.cookies);
-    // console.log(req.headers);
-
-
     
     // if access token is missing in cookie or header, then seller is unauthorised : thus an error will be thrown!
     if(!accessToken) throw new apiError(401,'Unauthorized request!')
