@@ -1,8 +1,11 @@
 import express from 'express'
+import path, { dirname } from 'path'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 const app = express()
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 // defining cors origin
 app.use(cors())
@@ -22,7 +25,7 @@ app.use(express.static('public'))
 // to parse incoming json data. 'body-parser' can also be used
 app.use(express.json())
 
-app.get('/',(req,res)=> {
+app.get('/',(req,res)=>{
     res.send('hello')
 })
 
@@ -33,6 +36,7 @@ import cartRoutes from './src/routes/cart.routes.js'
 import orderRoutes from './src/routes/order.routes.js'
 import sellerRoutes from './src/routes/seller.routes.js'
 import categories from './src/routes/category.routes.js'
+import { fileURLToPath } from 'url'
 
 app.use('/api/v1/user',userRoutes)
 

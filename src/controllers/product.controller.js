@@ -23,15 +23,13 @@ const getProducts = asyncHandler(async (req, res) => {
     try {
         const { category, subcategory } = req.params
 
-        let products;
+        let products=[];
   
         if(subcategory !== 'undefined'){
             products = await Product.find({subcategory})
         }else if(subcategory === 'undefined'){
             products = await Product.find({category})
         }
-
-        if(products.length===0) throw new apiError(404,'No Products Found in this category')
 
        res.status(200)
        .json(new apiResponse(200,products,'Products Fetched Successfully!'))

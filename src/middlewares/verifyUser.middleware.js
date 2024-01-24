@@ -5,7 +5,8 @@ import User from '../models/user.model.js'
 const verifyUser = async (req,_,next) =>{
    try {
      // accessing accessToken from cookies or header on client side
-     const accessToken = req.cookies?.accessToken || req.header('Authorization')?.replace('Bearer ','')
+     const accessToken = req.cookies?.accessToken
+      // || req.header('Authorization')?.replace('Bearer ','')
     
      // if access token is missing in cookie or header, then user is unauthorised : thus an error will be thrown!
      if(!accessToken) throw new apiError(401,'Unauthorized request!')

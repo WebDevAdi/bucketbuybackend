@@ -93,7 +93,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+'
 
 # Gatsby files
 .cache/
@@ -102,7 +102,7 @@ dist
 # public
 
 # vuepress build output
-.vuepress/dist
+.vuepress/'
 
 # vuepress v2.x temp and cache directory
 .temp
@@ -210,14 +210,14 @@ tramp
 
 # cask packages
 .cask/
-dist/
+'/
 
 # Flycheck
 flycheck_*.el
 
 # server auth directory
 /server/
-
+0
 # projectiles files
 .projectile
 
@@ -360,7 +360,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
