@@ -45,20 +45,21 @@ const addToCart = asyncHandler(async (req,res)=>{
 const removeItemFromCart = asyncHandler(async (req,res)=>{
     try {
         const user = req.user;
-        const productId = req.productId;
+        const {productId} = req.body
+        console.log(productId);
 
         const cart = await Cart.findOne({owner:user._id})
 
         if(!cart) throw new apiError(400,'No items in the cart')
 
-        cart.products = cart.products.map((item) => {
-            return item !== productId
+        cart.products = cart.products.filter((item) => {
+            return item.product._id != productId
         } )
 
-        cart.save({validateBeforeSave:false})
+        await cart.save({validateBeforeSave:false})
 
         res.status(200)
-        .json(new apiResponse(200,cart,'Removed!'))
+        .json(new apiResponse(200,cart,'Item Removed from Cart!'))
 
     } catch (error) {
         throw new apiError(error.code.error.message)
@@ -88,9 +89,43 @@ const getUserCart = asyncHandler(async (req,res) => {
     }
 })
 
+const updateQuantity = asyncHandler(async(req,res)=>{
+    try {
+        const user = req.user
+        const {productId,quantity} = req.body
+        console.log(req.body);
+
+        if(!user) throw new apiError(401,'Unauthorized Request!')
+
+        const cart = await Cart.findOne({owner:user._id})
+
+        if(!cart) throw new apiError(404,'Cart not found !')
+
+        cart.products = cart.products.map((product)=>{
+            if(product.product._id == productId){
+                product.quantity = quantity
+                console.log(product)
+                return product
+            }else{
+                return product
+            }
+        })
+
+        await cart.save({validateBeforeSave:false})
+
+        const updatedCart = await Cart.findOne({owner:user._id})
+
+        res.status(201)
+        .json(new apiResponse(201,updatedCart,'Cart updated successfully'))
+
+    } catch (error) {
+        throw new apiError(error.code,error.message)
+    }
+})
 
 export {
     addToCart,
     removeItemFromCart,
-    getUserCart
+    getUserCart,
+    updateQuantity
 }
