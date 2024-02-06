@@ -8,6 +8,6 @@ router.route('/newOrder').post(verifyUser,orderProduct)
 
 router.route('/cancelOrder').post(verifyUser,cancelOrder)
 
-router.route('/getAllOrders').post(verifyUser,getUserAllOrders)
+router.route('/getUserAllOrders').get(verifyUser,getUserAllOrders)
 
 export default router

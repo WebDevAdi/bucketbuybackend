@@ -79,7 +79,7 @@ const registerUser = asyncHandler(async (req,res) => {
 
 // login user
 const loginUser = asyncHandler(async (req,res)=>{
-    const {email,password} = req.body
+    const {email,password, rememberMe} = req.body
 
     console.log(req.body);
 
@@ -107,6 +107,13 @@ const loginUser = asyncHandler(async (req,res)=>{
         if(!user) throw new apiError(404,'User not found')
 
         // sending response
+
+        if (rememberMe) {
+            options.maxAge = 15 * 24 * 60 * 60 * 1000
+        } else {
+            options.maxAge = null
+        }
+
         res.status(200)
         .cookie('accessToken',accessToken,options)
         .cookie('refreshToken',refreshToken,options)
