@@ -39,7 +39,38 @@ const getProducts = asyncHandler(async (req, res) => {
     }
 })
 
+const getProductByUserSearch = asyncHandler(async(req,res)=>{
+    try {
+        const {page,limit} = req.query
+        const query = req.query.q.toLowerCase()
+        if(!query) throw new apiError(400,'Please enter something to query!')
+
+        const queryKeywords = query.split(' ')
+
+        const products = await Product.find({})
+        let searchedProducts = []
+
+        queryKeywords.forEach((keyword)=>{
+            products.forEach((product)=>{
+                let matchString = (product.title + " " + product.category + " " + product.subcategory).toLowerCase()
+                if(matchString.includes(keyword)){
+                    searchedProducts.push(product)
+                }
+            })
+        })
+        
+        if(searchedProducts.length===0) throw new apiError(404,'No Products Found! Please check typos or try with another relevant keyword')
+
+        res.status(200)
+        .json({...new apiResponse(200,searchedProducts.slice((page-1)*limit,page*limit),'Products fetched successfully'), totalResults:searchedProducts.length})
+
+    } catch (error) {
+        throw new apiError(error.code,error.message)
+    }
+})
+
 export {
     getProductById,
-    getProducts
+    getProducts,
+    getProductByUserSearch
 }
