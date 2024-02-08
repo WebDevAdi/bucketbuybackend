@@ -8,7 +8,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 // defining cors origin
-app.use(cors())
+app.use(cors({
+    origin:'https://bucketbuy.onrender.com'
+}))
 
 
 // to manupulate cookies on client side from server
