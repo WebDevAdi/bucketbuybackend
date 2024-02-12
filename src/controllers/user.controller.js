@@ -8,11 +8,7 @@ import asyncHandler from '../utils/asyncHandler.js'
 // this object will be passed as a parameter while sending cookies to client
 const options = {
     // if httpOnly is set to true, then cookie cannot be manupulated from client-side
-    httpOnly:true, 
-    secure:true,
-    domain:'.onrender.com',
-    path:'/',
-    SameSite:'none'
+    httpOnly:true,
 }
 
 // below function will generate access and refresh tokens 
