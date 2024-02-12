@@ -10,6 +10,8 @@ const options = {
     // if httpOnly is set to true, then cookie cannot be manupulated from client-side
     httpOnly:true, 
     secure:true,
+    domain:'.bucketbuy.onrender.com',
+    path:'/',
     SameSite:'none'
 }
 
