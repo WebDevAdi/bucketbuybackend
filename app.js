@@ -8,15 +8,17 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 // defining cors origin
-app.use(cors({
-    origin:'https://bucketbuy.onrender.com'
-}))
+app.use(cors())
 
+// app.use(express.static(path.join(`${__dirname}/dist`)))
+
+// app.get('/',(req,res)=>{
+//     console.log(__dirname)
+//     res.end()
+// })
 
 // to manupulate cookies on client side from server
 app.use(cookieParser())
-
-
 
 // to parse the data comming from url
 app.use(express.urlencoded({extended:true, limit:'100kb'}))
@@ -27,9 +29,9 @@ app.use(express.static('public'))
 // to parse incoming json data. 'body-parser' can also be used
 app.use(express.json())
 
-app.get('/',(req,res)=>{
-    res.send('hello')
-})
+// app.get('/',(req,res)=>{
+//     res.send('hello')
+// })
 
 // routes 
 import userRoutes from './src/routes/user.routes.js'
