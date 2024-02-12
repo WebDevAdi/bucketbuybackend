@@ -67,6 +67,8 @@ const registerUser = asyncHandler(async (req,res) => {
  
         const userToBeSentAsResponse = await User.findById(user._id).select('-password -refreshToken')
         // if everything works fine , below response will be sent to client side
+
+        console.log(userToBeSentAsResponse);
        res.status(201)
        .cookie('accessToken',accessToken,options) // setting access token in user's browser
        .cookie('refreshToken',refreshToken,options) // setting refresh token in user's browser
