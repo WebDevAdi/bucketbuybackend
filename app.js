@@ -9,6 +9,7 @@ const __dirname = dirname(__filename)
 
 // defining cors origin
 app.use(cors())
+app.use(cookieParser())
 
 app.use(express.static(path.join(`${__dirname}/dist`)))
 
@@ -17,7 +18,6 @@ app.get('*',(req,res)=>{
 })
 
 // to manupulate cookies on client side from server
-app.use(cookieParser())
 
 
 // to parse the data comming from url
