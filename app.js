@@ -13,9 +13,7 @@ app.use(cookieParser())
 
 app.use(express.static(path.join(`${__dirname}/dist`)))
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(`${__dirname}/dist/index.html`))
-})
+
 
 // to manupulate cookies on client side from server
 
@@ -53,5 +51,9 @@ app.use('/api/v1/order',orderRoutes)
 app.use('/api/v1/seller',sellerRoutes)
 
 app.use('/api/v1/categories',categories)
+
+app.use('/*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'dist','index.html'))
+})
 
 export default app

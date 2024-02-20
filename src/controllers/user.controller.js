@@ -10,8 +10,8 @@ const options = {
     // if httpOnly is set to true, then cookie cannot be manupulated from client-side
     httpOnly:true,
     secure:true,
-    domain:'bucketbuy.store',
-    path:'/'
+    // domain:'bucketbuy.store',
+    // path:'/'
 }
 
 // below function will generate access and refresh tokens 
@@ -84,8 +84,7 @@ const registerUser = asyncHandler(async (req,res) => {
 // login user
 const loginUser = asyncHandler(async (req,res)=>{
     const {email,password, rememberMe} = req.body
-
-    console.log(req.body);
+ 
 
     try {
         // check if the user with the provided email exists or not
@@ -117,8 +116,6 @@ const loginUser = asyncHandler(async (req,res)=>{
         } else {
             options.maxAge = null
         }
-
-        console.log(user);
 
         res.status(200)
         .cookie('accessToken',accessToken,options)
@@ -210,6 +207,8 @@ const deleteUser = asyncHandler(async (req,res) => {
 const getCurrentUserDetails = asyncHandler(async (req,res) => {
     try {
         const user = req.user
+
+        console.log(req.cookies);
 
         if(!user)  throw new apiError(401,'User not found! Please login')
         const existingUser = await User.findById(user._id)
