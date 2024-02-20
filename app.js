@@ -12,8 +12,8 @@ app.use(cors())
 
 app.use(express.static(path.join(`${__dirname}/dist`)))
 
-app.get('/',(req,res)=>{
-    res.send('hello')
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(`${__dirname}/dist`))
 })
 
 // to manupulate cookies on client side from server
