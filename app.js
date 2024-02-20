@@ -17,8 +17,13 @@ app.use(cors())
 //     res.end()
 // })
 
+app.get('/',(req,res)=>{
+    res.send('hello')
+})
+
 // to manupulate cookies on client side from server
 app.use(cookieParser())
+
 
 // to parse the data comming from url
 app.use(express.urlencoded({extended:true, limit:'100kb'}))
