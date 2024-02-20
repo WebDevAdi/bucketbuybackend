@@ -10,7 +10,7 @@ const __dirname = dirname(__filename)
 // defining cors origin
 app.use(cors())
 
-// app.use(express.static(path.join(`${__dirname}/dist`)))
+app.use(express.static(path.join(`${__dirname}/dist`)))
 
 // app.get('/',(req,res)=>{
 //     console.log(__dirname)
