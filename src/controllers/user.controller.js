@@ -10,6 +10,8 @@ const options = {
     // if httpOnly is set to true, then cookie cannot be manupulated from client-side
     httpOnly:true,
     secure:true,
+    domain:'bucketbuy.store',
+    path:'/'
 }
 
 // below function will generate access and refresh tokens 
