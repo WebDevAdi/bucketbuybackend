@@ -8,7 +8,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 // defining cors origin
-app.use(cors())
+app.use(cors({
+    origin:process.env.NODE_ENV==='production'?'https://bucketbuy.store':'*',
+    credentials:true
+}))
 
 app.use(express.static(path.join(`${__dirname}/dist`)))
 
