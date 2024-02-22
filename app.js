@@ -19,7 +19,7 @@ app.use(express.static(path.join(`${__dirname}/dist`)))
 
 
 // to parse the data comming from url
-app.use(express.urlencoded({extended:true, limit:'100kb'}))
+app.use(express.urlencoded({extended:true}))
 
 // to access public folder
 app.use(express.static('public'))
@@ -27,9 +27,6 @@ app.use(express.static('public'))
 // to parse incoming json data. 'body-parser' can also be used
 app.use(express.json())
 
-// app.get('/',(req,res)=>{
-//     res.send('hello')
-// })
 
 // routes 
 import userRoutes from './src/routes/user.routes.js'

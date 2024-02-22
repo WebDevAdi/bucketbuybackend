@@ -27,33 +27,33 @@ const userSchema = new Schema({
         trim:true,
         minlength:[8,'Please enter a password having atleast 8 characters!']
     },
-    // address:{
-    //     streetAddress:{
-    //         type:String,
-    //         required : [true,'Please enter you street address!'],
-    //         trim:true,
-    //     },
-    //     apartment:{
-    //         type:String,
-    //     },
-    //     city:{
-    //         type:String,
-    //         required:[true,'Please select your city name!'],
-    //     },
-    //     state:{
-    //         type:String,
-    //         required:[true,'Please select your state']
-    //     },
-    //     pinCode:{
-    //         type:String,
-    //         required:[true,'Please enter a valid pincode!']
-    //     },
-    //     country:{
-    //         type:String,
-    //         default:'India'
-    //     }
+    address:{
+        streetAddress:{
+            type:String,
+            required : [true,'Please enter you street address!'],
+            trim:true,
+        },
+        apartment:{
+            type:String,
+        },
+        city:{
+            type:String,
+            required:[true,'Please select your city name!'],
+        },
+        state:{
+            type:String,
+            required:[true,'Please select your state']
+        },
+        pinCode:{
+            type:String,
+            required:[true,'Please enter a valid pincode!']
+        },
+        country:{
+            type:String,
+            default:'India'
+        }
 
-    // },
+    },
     ordersHistory:[
         {
             type:Schema.Types.ObjectId,

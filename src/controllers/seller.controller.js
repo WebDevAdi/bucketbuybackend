@@ -25,6 +25,8 @@ const createSellerAccount = asyncHandler(async (req, res) => {
     try {
         const { fullname, email, password } = req.body
 
+        console.log(req.body);
+
         // checking empty fields
         if ([fullname, email.password].some((field) => field == '')) throw new apiError(400, 'All fields are required!')
 

@@ -29,12 +29,12 @@ const generateAccessAndRefreshTokens = async (userId) => {
 // below function registers the user in the database
 const registerUser = asyncHandler(async (req,res) => {
     // destructuring data from req.body
-    // TODO: add address
-    const {fullname, email, password, phoneNumber, dob} = req.body
-
+    const {fullname, email, password, phoneNumber, dob, gender, streetAddress, apartment, state, city, pinCode} = req.body
+    
     try {
+        
         // if any of the field from req.body is empty, an error will be thrown
-        if([fullname,email,password,phoneNumber,dob].some((field)=>field?.trim()==='')){
+        if([fullname,email,password,phoneNumber,dob,gender, streetAddress, apartment, state, city, pinCode].some((field)=>field?.trim()==='')){
             throw new apiError(400,'All fields are required!')
         }
 
@@ -45,7 +45,19 @@ const registerUser = asyncHandler(async (req,res) => {
 
         // below method will create an user in the database and return the created user
         const newUser = await User.create({
-            fullname,email,password,phoneNumber,dob:new Date(dob)
+            fullname,
+            email,
+            password,
+            phoneNumber,
+            dob:new Date(dob),
+            gender,
+            address:{
+                streetAddress,
+                apartment,
+                city,
+                state,
+                pinCode
+            }
         })
  
         if(!newUser) throw new apiError(500,'Some error occurred while creating account, please try again later!')
@@ -69,13 +81,11 @@ const registerUser = asyncHandler(async (req,res) => {
         const userToBeSentAsResponse = await User.findById(user._id).select('-password -refreshToken')
         // if everything works fine , below response will be sent to client side
 
-        console.log(userToBeSentAsResponse);
        res.status(201)
        .cookie('accessToken',accessToken,options) // setting access token in user's browser
        .cookie('refreshToken',refreshToken,options) // setting refresh token in user's browser
        .json(new apiResponse(201,userToBeSentAsResponse,'Account created successfully!'))// sending user as a response 
 
-    // loginUser();
     } catch (error) {
         throw new apiError(error.code,error.message)
     }
@@ -207,8 +217,6 @@ const deleteUser = asyncHandler(async (req,res) => {
 const getCurrentUserDetails = asyncHandler(async (req,res) => {
     try {
         const user = req.user
-
-        console.log(req.cookies);
 
         if(!user)  throw new apiError(401,'User not found! Please login')
         const existingUser = await User.findById(user._id)
