@@ -162,7 +162,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
         if ([title, price, description, productImages, category].some((field) => { field === '' })) throw new apiError(400, 'All fields are required!')
 
-        const product = await Product.create({ title, price: `₹ ${price}`, description, productImages, category, subcategory, owner: req.seller?._id })
+        const product = await Product.create({ title, price: `${price}`, description, productImages, category, subcategory, owner: req.seller?._id })
 
         if (!product) throw new apiError(500, 'Some error occurred while listing your product, please try again later!')
 
